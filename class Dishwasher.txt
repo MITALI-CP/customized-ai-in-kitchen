@@ -1,0 +1,55 @@
+class Dishwasher:
+    def __init__(self):
+        self.is_loaded = False
+        self.is_running = False
+        self.loaded_dishes = []
+
+    def load_dishes(self, dishes):
+        if self.is_running:
+            print("Cannot load dishes while the dishwasher is running.")
+            return
+        self.loaded_dishes.extend(dishes)
+        self.is_loaded = True
+        print(f"{len(dishes)} dishes loaded into the dishwasher.")
+
+    def start(self):
+        if not self.is_loaded:
+            print("No dishes loaded. Please load dishes before starting.")
+            return
+        print("Dishwasher started.")
+        self.is_running = True
+        self.clean_dishes()
+
+    def clean_dishes(self):
+        print("Cleaning dishes...")
+        self.loaded_dishes = []
+        self.is_loaded = False
+        self.is_running = False
+        print("Dishes cleaned and dishwasher stopped.")
+
+    def unload_dishes(self):
+        if self.is_running:
+            print("Cannot unload dishes while the dishwasher is running.")
+            return
+        if not self.loaded_dishes:
+            print("No dishes to unload.")
+            return
+        print("Unloading dishes...")
+        for dish in self.loaded_dishes:
+            print(f"Unloading {dish}")
+        self.loaded_dishes = []
+        print("Dishes unloaded from the dishwasher.")
+
+# Example usage:
+if __name__ == "__main__":
+    dishwasher = Dishwasher()
+
+    # Loading dishes
+    dishes_to_load = ["Plate", "Bowl", "Cup"]
+    dishwasher.load_dishes(dishes_to_load)
+
+    # Starting the dishwasher
+    dishwasher.start()
+
+    # Unloading cleaned dishes
+    dishwasher.unload_dishes()

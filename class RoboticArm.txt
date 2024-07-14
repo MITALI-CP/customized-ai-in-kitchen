@@ -1,0 +1,42 @@
+class RoboticArm:
+    def __init__(self):
+        self.is_busy = False
+        self.position = (0, 0, 0)  # (x, y, z) coordinates
+
+    def move_to(self, x, y, z):
+        if self.is_busy:
+            print("Cannot move while the arm is busy.")
+            return
+        self.position = (x, y, z)
+        print(f"Arm moved to position: ({x}, {y}, {z})")
+
+    def pick_up(self, item):
+        if self.is_busy:
+            print("Cannot pick up item while the arm is busy.")
+            return
+        self.is_busy = True
+        print(f"Arm picking up {item}...")
+        self.move_to(self.position[0], self.position[1], self.position[2] + 1)  # Lift up
+        print(f"{item} picked up.")
+
+    def release(self, item):
+        if not self.is_busy:
+            print("Arm is not holding anything to release.")
+            return
+        print(f"Arm releasing {item}...")
+        self.move_to(self.position[0], self.position[1], self.position[2] - 1)  # Lower down
+        print(f"{item} released.")
+        self.is_busy = False
+
+# Example usage:
+if __name__ == "__main__":
+    robotic_arm = RoboticArm()
+
+    # Moving the arm
+    robotic_arm.move_to(10, 5, 0)
+
+    # Picking up an item
+    robotic_arm.pick_up("Plate")
+
+    # Releasing the item
+    robotic_arm.release("Plate")
