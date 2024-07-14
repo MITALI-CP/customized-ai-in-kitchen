@@ -1,0 +1,35 @@
+class Oven:
+    def __init__(self):
+        self.temperature = 0
+        self.timer = 0
+        self.is_running = False
+
+    def set_temperature(self, temp):
+        if temp < 0 or temp > 300:
+            raise ValueError("Temperature out of range (0-300)")
+        self.temperature = temp
+        print(f"Temperature set to {self.temperature} degrees Celsius")
+
+    def set_timer(self, minutes):
+        if minutes < 0:
+            raise ValueError("Timer cannot be negative")
+        self.timer = minutes
+        print(f"Timer set to {self.timer} minutes")
+
+    def start(self):
+        if self.temperature == 0 or self.timer == 0:
+            print("Please set temperature and timer before starting")
+        else:
+            print("Oven started.")
+            self.is_running = True
+
+    def stop(self):
+        print("Oven stopped.")
+        self.is_running = False
+
+# Example usage:
+if __name__ == "__main__":
+    my_oven = Oven()
+    my_oven.set_temperature(180)
+    my_oven.set_timer(30)
+    my_oven.start()
